@@ -20,7 +20,7 @@ function camelCase(chaine) {
     if(typeof chaine !== "string" || chaine === "") {
         return "";
     }
-    return capitalize(chaine).replace(/\W/g, "");
+    return capitalize(chaine).replace(/\W|_/g, "");
     
     /*let words = chaine.split(" ");
     for(let i = 0; i < words.length; i++) {
@@ -64,18 +64,26 @@ function leet(chaine) {
 
 
 function prop_access(object, chaine) {
+    if(typeof object !== "object" || object === null) {
+        return chaine + "not exist";
+    }
     if(typeof chaine !== "string" || chaine === "") {
         return object;
     }
     let path = chaine.split(".");
-    for(let i = 0; i < path.length; i++) {
-        if(object.hasOwnProperty(path[i])) {
-
+    for(let elt of path) {
+        if(object.hasOwnProperty(elt)) {
+            if(elt === path[path.length - 1]) {
+                return object[elt];
+            } else {
+                object = object[elt];
+            }
         } else {
-            return "";
+            return path.slice(0, path.indexOf(elt)).join(".") + "not exist";
         }
     }
 }
+
 
 
 
@@ -99,6 +107,29 @@ function yoda(chaine) {
 }
 
 
-function vig(chaine) {
-    
+function vig(string, code) {
+    if (typeof string !== "string") return "";
+    if (string.length === 0) return string;
+
+    while (code.length < string.length) {
+        code += code;
+    }
+    code = code.substr(0, string.length);
+    let codeIndex = 0;
+
+    return string
+        .split("")
+        .map((letter, index) => {
+        letter = letter.toLowerCase();
+        const aCode = "a".charCodeAt(0);
+        const letterNumber = letter.charCodeAt(0) - aCode; // [0-25]
+
+        if (letterNumber < 0 || letterNumber > 25) return letter;
+
+        const codeNumber = code.charCodeAt(codeIndex) - aCode; // [0-25]
+        codeIndex++;
+
+        return String.fromCharCode(((letterNumber + codeNumber) % 26) + aCode);
+        })
+        .join("");
 }
