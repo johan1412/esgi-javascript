@@ -1,4 +1,4 @@
-function type_check_v1(value, type) {
+function type_check_v1 (value, type) {
     const typeOfVariable = typeof value;
     switch (typeOfVariable) {
         case "string":
@@ -23,7 +23,7 @@ function type_check_v1(value, type) {
 }
 
 
-function type_check_v2(value, conf) {
+function type_check_v2 (value, conf) {
     for(key in conf) {
         switch(key) {
             case "type":
@@ -50,7 +50,14 @@ function type_check_v2(value, conf) {
 }
 
 
-function type_check(value, conf) {
-    
+function type_check (conf, props) {
+    if (!type_check_v2(conf, props)) {
+        return false;
+    }
+    if(props.hasOwnProperties("properties")) {
+        for(let property in props.properties) {
+            
+        }
+    }
 }
 

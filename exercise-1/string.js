@@ -1,4 +1,4 @@
-function ucfirst(chaine) {
+function ucfirst (chaine) {
     if(typeof chaine !== "string" || chaine === "") {
         return "";
     }
@@ -7,7 +7,7 @@ function ucfirst(chaine) {
 
 
 
-function capitalize(chaine) {
+function capitalize (chaine) {
     if(typeof chaine !== "string" || chaine === "") {
         return "";
     }
@@ -16,54 +16,51 @@ function capitalize(chaine) {
 
 
 
-function camelCase(chaine) {
+function camelCase (chaine) {
     if(typeof chaine !== "string" || chaine === "") {
         return "";
     }
-    return capitalize(chaine).replace(/\W|_/g, "");
-    
-    /*let words = chaine.split(" ");
-    for(let i = 0; i < words.length; i++) {
-        words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
-
-    }
-    return words.join("");*/
+    const chaineReplaced = chaine.replace(/[\W_]+/g, " ");
+    return capitalize(chaineReplaced).replace(/ +/g, "");
 }
 
 
 
 
-function snake_case(chaine) {
+function snake_case (chaine) {
     if(typeof chaine !== "string" || chaine === "") {
         return "";
     }
     return chaine.toLowerCase().replace(/\W/g, "_");
-    /*if(typeof chaine !== "string" || chaine === "") {
-        return "";
-    }
-    let words = chaine.split(" ");
-    for(let i = 0; i < words.length; i++) {
-        words[i] = words[i].charAt(0).toLowerCase() + words[i].slice(1);
-
-    }
-    return words.join("_");*/
 }
 
 
 
-function leet(chaine) {
+function leet (chaine) {
     if(typeof chaine !== "string" || chaine === "") {
         return "";
     }
-    const obj = {a: 4, e: 3, i: 1, o: 0, u: '(_)', y: 7};
-    return chaine.replace(/[AEIOUY]/gi, function(e) {
-        return obj[e.toLowerCase()] !== undefined ? obj[e.toLowerCase()] : e;
+    return chaine.replace(/[aeiouy]/gi, function (e) {
+        switch(e.toLowerCase()) {
+            case 'a':
+              return 4;
+            case 'e':
+              return 3;
+            case 'i':
+              return 1;
+            case 'o':
+              return 0;
+            case 'u':
+              return '(_)';
+            case 'y':
+              return 7;
+          }
     });
 }
 
 
 
-function prop_access(object, chaine) {
+function prop_access (object, chaine) {
     if(typeof object !== "object" || object === null) {
         return chaine + "not exist";
     }
@@ -87,7 +84,7 @@ function prop_access(object, chaine) {
 
 
 
-function verlan(chaine) {
+function verlan (chaine) {
     if(typeof chaine !== "string" || chaine === "") {
         return "";
     }
@@ -99,7 +96,7 @@ function verlan(chaine) {
 
 
 
-function yoda(chaine) {
+function yoda (chaine) {
     if(typeof chaine !== "string" || chaine === "") {
         return "";
     }
@@ -107,7 +104,7 @@ function yoda(chaine) {
 }
 
 
-function vig(string, code) {
+function vig (string, code) {
     if (typeof string !== "string") return "";
     if (string.length === 0) return string;
 
